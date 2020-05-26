@@ -1,0 +1,13 @@
+FROM confluentinc/cp-kafka:5.3.1
+
+WORKDIR /app
+
+RUN wget -nv http://apache.mirror.globo.tech/kafka/2.4.0/kafka_2.12-2.4.0.tgz -O /tmp/kafka.tgz
+RUN tar -xvf /tmp/kafka.tgz -C /opt/
+RUN mv /opt/kafka_2.12-2.4.0 /opt/kafka
+
+COPY cassandra-synch cassandra-synch
+
+RUN ls -l cassandra-synch
+
+ENTRYPOINT ["/opt/kafka/bin/connect-standalone.sh", "/app/cassandra-synch/connect.properties", "/app/cassandra-synch/source.properties"]
