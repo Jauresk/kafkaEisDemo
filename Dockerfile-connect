@@ -8,6 +8,4 @@ RUN mv /opt/kafka_2.12-2.4.0 /opt/kafka
 
 COPY cassandra-synch cassandra-synch
 
-RUN ls -l cassandra-synch
-
 ENTRYPOINT ["/opt/kafka/bin/connect-standalone.sh", "/app/cassandra-synch/connect.properties", "/app/cassandra-synch/source.properties"]
